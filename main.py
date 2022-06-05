@@ -1,4 +1,5 @@
 """ Кастомный HTTP сервер на Python """
+import urllib.parse
 from http import HTTPStatus
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
@@ -14,13 +15,13 @@ class OurHandler(BaseHTTPRequestHandler):
 
         self.wfile.write("<h1>404 Not Found!</h1>".encode("utf-8"))
 
-    def simple_page(self):
+    def simple_page(self, body: str = "<h1>Subscribe to @FlongyDev</h1>"):
         """ Статическая страница с фиксированным HTML """
         self.send_response(HTTPStatus.OK)
         self.send_header("Content-Type", "text/html; charset=UTF-8")
         self.end_headers()
 
-        self.wfile.write("<h1>Subscribe to @FlongyDev</h1>".encode("utf-8"))
+        self.wfile.write(body.encode("utf-8"))
 
     def echo_page(self):
         """ Эхо-страница: возвращает строку запроса от клиента """
@@ -53,6 +54,26 @@ class OurHandler(BaseHTTPRequestHandler):
             self.file_page("post-form.html")
         else:
             self.not_found()
+
+    def _process_post_urlencoded(self) -> dict[str, str]:
+        """ Парсинг POST запросов типа `application/x-www-form-urlencoded` """
+        length = int(self.headers["Content-Length"])
+        data = self.rfile.read(length).decode("ascii")
+        result = {}
+        for pair in data.split('&'):
+            key, value = pair.split('=', 1)
+            result[urllib.parse.unquote(key)] = urllib.parse.unquote(value)
+
+        return result
+
+    def do_POST(self):
+        """ Обработка POST запросов к серверу """
+        content_type = self.headers["Content-Type"]
+        if content_type == "application/x-www-form-urlencoded":
+            result = self._process_post_urlencoded()
+            self.simple_page(str(result))
+        else:
+            self.log_error("Unknown content_type: %s", content_type)
 
 
 if __name__ == "__main__":
