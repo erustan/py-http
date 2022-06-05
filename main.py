@@ -32,13 +32,13 @@ class OurHandler(BaseHTTPRequestHandler):
         msg = f"{self.requestline}\nIP address: {ip}"
         self.wfile.write(msg.encode("utf-8"))
 
-    def index_page(self):
-        """ Страница из файла index.html """
+    def file_page(self, filename: str = "index.html"):
+        """ Страница из файла """
         self.send_response(HTTPStatus.OK)
         self.send_header("Content-Type", "text/html; charset=UTF-8")
         self.end_headers()
 
-        with open("index.html", 'rb') as f:
+        with open(filename, 'rb') as f:
             self.wfile.write(f.read())
 
     def do_GET(self):
@@ -48,7 +48,9 @@ class OurHandler(BaseHTTPRequestHandler):
         elif self.path.startswith("/echo"):
             self.echo_page()
         elif self.path.startswith("/index"):
-            self.index_page()
+            self.file_page()
+        elif self.path.startswith("/say"):
+            self.file_page("post-form.html")
         else:
             self.not_found()
 
