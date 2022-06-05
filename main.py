@@ -4,6 +4,15 @@ from http import HTTPStatus
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 
+def dict_as_html_table(data: dict[str, str]) -> str:
+    """ Форматирование словаря в виде HTML таблицы """
+    lines = []
+    for key, val in data.items():
+        lines.append(f"<tr><td>{key}</td><td>{val}</td></tr>")
+
+    return f"<table border=\"1\"><tr><th>key</th><th>value</th></tr>{''.join(lines)}</table>"
+
+
 class OurHandler(BaseHTTPRequestHandler):
     """ Пример обработчика HTTP запросов """
 
@@ -71,7 +80,7 @@ class OurHandler(BaseHTTPRequestHandler):
         content_type = self.headers["Content-Type"]
         if content_type == "application/x-www-form-urlencoded":
             result = self._process_post_urlencoded()
-            self.simple_page(str(result))
+            self.simple_page(dict_as_html_table(result))
         else:
             self.log_error("Unknown content_type: %s", content_type)
 
