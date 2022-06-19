@@ -24,3 +24,5 @@
 - HTTP сервер: https://docs.python.org/3/library/http.server.html
 - Статусы HTTP и их описания: https://developer.mozilla.org/ru/docs/Web/HTTP/Status
 - Заголовки HTTP (на английском): https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers
+- HTTP POST метод: https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST
+- Элементарная форма для отправки данных методом POST: https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data
