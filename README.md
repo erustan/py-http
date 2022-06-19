@@ -5,6 +5,9 @@
 ## Часть 2
 [![Видео](https://img.youtube.com/vi/4Wiqf9hoRmA/maxresdefault.jpg)](https://youtu.be/4Wiqf9hoRmA)
 
+## Часть 3
+[![Видео](https://img.youtube.com/vi/3ljjuBN8RZs/maxresdefault.jpg)](https://youtu.be/3ljjuBN8RZs)
+
 ## Плейлист
 [![Видео](https://img.youtube.com/vi/0iBVH2Y9j-s/maxresdefault.jpg)](https://www.youtube.com/watch?v=0iBVH2Y9j-s&list=PL9zxc4HyFoESfSwiNAGttz4pXgTjBa3Ra)
 
