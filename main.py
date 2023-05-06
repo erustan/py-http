@@ -16,6 +16,10 @@ def dict_as_html_table(data: dict[str, str]) -> str:
 class OurHandler(BaseHTTPRequestHandler):
     """ Пример обработчика HTTP запросов """
 
+    def _headers(self):
+        self.send_response(HTTPStatus.OK)
+        self.send_header("Content-Type", "text/html; charset=UTF-8")
+
     def not_found(self):
         """ Страница для ненайденных ресурсов (страниц) """
         self.send_response(HTTPStatus.NOT_FOUND)
@@ -53,6 +57,7 @@ class OurHandler(BaseHTTPRequestHandler):
 
 
     def dummy_page(self):
+        self._headers()
         self.wfile.write(b"Dummy page for debug")
 
     def do_GET(self):
