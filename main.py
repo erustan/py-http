@@ -55,7 +55,6 @@ class OurHandler(BaseHTTPRequestHandler):
         with open(filename, 'rb') as f:
             self.wfile.write(f.read())
 
-
     def dummy_page(self):
         self._headers()
         self.wfile.write(b"Dummy page for debug")
