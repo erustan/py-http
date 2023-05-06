@@ -51,6 +51,9 @@ class OurHandler(BaseHTTPRequestHandler):
         with open(filename, 'rb') as f:
             self.wfile.write(f.read())
 
+    def dummy_page(self):
+        self.echo_page()
+
     def do_GET(self):
         """ Обработка GET запросов к серверу """
         if self.path == "/":
